@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Architecture & Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <style>
+        :root {
+            --primary-color: #B1935D;
+            --dark-color: #1A1A1A;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1497366216548-37526070297c') center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            color: #fff;
+        }
+
+        .contact-info-card {
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #8e7547;
+            border-color: #8e7547;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <div style="font-size: 30px; font-weight: bold;color: white;">Homi Verses </div> 
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html" style="font-size: 20px;">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="our_villas.html" style="font-size: 20px;">Our Villas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about_us.html" style="font-size: 20px;">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact_us.html" style="font-size: 20px;">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sign_up.html" style="font-size: 20px;">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html" style="font-size: 20px;">Log In</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Contact Us</h1>
+            <p class="lead fs-3">Get in Touch with Our Team</p>
+            <p class="w-75 mx-auto mt-4">We're here to answer any questions you may have about our services</p>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="contact-info-card text-center">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <h4>Our Location</h4>
+                        <p>123 Architecture Street<br>City, Country</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-info-card text-center">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <h4>Phone Number</h4>
+                        <p>+1 (234) 567-8900<br>+1 (234) 567-8901</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-info-card text-center">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <h4>Email Address</h4>
+                        <p>info@architecture.com<br>support@architecture.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-form">
+                        <h3 class="mb-4">Send us a Message</h3>
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Your Name">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Your Email">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Subject">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="footer-heading">About Us</h4>
+                    <p>We are dedicated to creating exceptional architectural designs that transform spaces and enhance lives. Our commitment to excellence drives everything we do.</p>
+                    <div class="social-links mt-3 ">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="./index.html" class="footer-link">Home</a></li>
+                        <li><a href="our_villas.html" class="footer-link">Our villas</a></li>
+                        <li><a href="about_us.html" class="footer-link">About Us</a></li>
+                        <li><a href="contact_us.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Architecture Street, City, Country</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 (234) 567-8900</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@architecture.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4 " style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0">&copy; 2024 Architecture & Design. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Villa Rentals</title>
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="css/footer.css">
+  <style>
+    :root {
+        --primary-color: #B1935D;
+        --dark-color: #1A1A1A;
+    }
+
+    .card1 {
+      height: 100%;
+      overflow: hidden;
+      transition: 0.4s;
+    }
+
+    .card1:hover {
+      height: auto;
+    }
+
+    .submit-bid {
+      display: block;
+      /* Show book now button by default */
+    }
+
+    .card1:hover .submit-bid {
+      display: block;
+    }
+
+    .card_img {
+      height: 300px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .carousel-item img {
+      height: 450px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .filters {
+      background-color: #E6E6FA;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+  <script>
+    const villasData = [
+      {
+        id: 1,
+        location: "Beachfront",
+        date: ["2025-01-11", "2025-01-12", "2025-01-13", "2025-01-14", "2025-01-15", "2025-01-10", "2025-01-16", "2025-01-17", "2025-01-18", "2025-01-19", "2025-01-20", "2025-01-21", "2025-01-22", "2025-01-23", "2025-01-24", "2025-01-25", "2025-01-26", "2025-01-27", "2025-01-28", "2025-01-29", "2025-01-30", "2025-01-31"],
+        price: 800,
+        image: "./img/1.jpg",
+        villamulteimg: ["./img/1.jpg", "./img/4.jpg", "./img/8.jpg", "./img/12.jpg"],
+        description: "Location: Goa<br>Price: ₹800"
+      },
+      {
+        id: 2,
+        location: "Mountain",
+        date: ["2025-01-11", "2025-01-12", "2025-01-13", "2025-01-14", "2025-01-15", "2025-01-16", "2025-01-17", "2025-01-18", "2025-01-19", "2025-01-20", "2025-01-21", "2025-01-22", "2025-01-23", "2025-01-24", "2025-01-25", "2025-01-26", "2025-01-27", "2025-01-28", "2025-01-29", "2025-01-30", "2025-01-31"],
+        price: 500,
+        image: "./img/19.webp",
+        villamulteimg: ["./img/19.webp", "./img/23.avif", "./img/20.jpg", "./img/21.jpg"],
+        description: "Location: Himalayas<br>Price: ₹500"
+      },
+      {
+        id: 3,
+        location: "City",
+        date: ["2025-01-11"],
+        price: 2500,
+        image: "./img/WhatsApp Image 2025-02-21 at 19.07.38_36853180.jpg",
+        villamulteimg: ["./img/WhatsApp Image 2025-02-21 at 19.07.38_1776f32d.jpg", "./img/WhatsApp Image 2025-02-21 at 19.07.38_2fb4fea4.jpg", "./img/15.jpg", "./img/WhatsApp Image 2025-02-21 at 19.07.38_36853180.jpg"],
+        description: "Location: New Delhi<br>Price: ₹2500"
+      },
+      {
+        id: 4,
+        location: "Beachfront",
+        date: ["2025-01-11"],
+        price: 1000,
+        image: "./img/3.jpg",
+        villamulteimg: ["./img/11.jpg", "./img/3.jpg", "./img/5.jpg", "./img/16.jpg"],
+        description: "Location: Goa<br>Price: ₹1000"
+      },
+      {
+        id: 5,
+        location: "Mountain",
+        date: ["2025-11-20"],
+        price: 500,
+        image: "./img/18.jpg",
+        villamulteimg: ["./img/22.avif", "./img/18.jpg", "./img/WhatsApp Image 2025-02-21 at 19.07.38_36853180.jpg", "./img/WhatsApp Image 2025-02-21 at 19.07.38_3af89339.jpg"],
+        description: "Location: Himalayas<br>Price: ₹500"
+      },
+      {
+        id: 6,
+        location: "City",
+        date: ["2025-01-11"],
+        price: 3000,
+        image: "./img/WhatsApp Image 2025-02-21 at 19.07.38_3af89339.jpg",
+        villamulteimg: ["./img/WhatsApp Image 2025-02-21 at 19.07.38_3af89339.jpg", "./img/WhatsApp Image 2025-02-21 at 19.07.38_2fb4fea4.jpg", "./img/WhatsApp Image 2025-02-21 at 19.07.39_a704a1eb.jpg", "./img/WhatsApp Image 2025-02-21 at 19.07.40_d2ce92c5.jpg"],
+        description: "Location: Mumbai<br>Price: ₹3000"
+      }
+    ];
+
+    function applyFilters(clear) {
+
+      if (clear) {
+        document.getElementById('location').value = '';
+        document.getElementById('start-date').value = '';
+        document.getElementById('end-date').value = '';
+        document.getElementById('price').value = '';
+        let found = false;
+      }
+
+
+
+      const location = document.getElementById('location').value;
+      const startDate = new Date(document.getElementById('start-date').value);
+      const endDate = new Date(document.getElementById('end-date').value);
+      const price = parseFloat(document.getElementById('price').value);
+      let found = false;
+      const villaList = document.getElementById('villaList');
+      villaList.innerHTML = ''; // Clear the villa list before appending new filtered villas
+
+      villasData.filter(villa => {
+        let show = true;
+        if (location && villa.location !== location) show = false;
+        if (startDate && new Date(villa.date[0]) < startDate) show = false;
+        if (endDate && new Date(villa.date[villa.date.length - 1]) > endDate) show = false;
+        if (!isNaN(price) && villa.price > price) show = false;
+
+        if (show) {
+          found = true;
+          const villaCard = document.createElement('div');
+          villaCard.className = 'col-xl-6 col-md-12 mb-4 villa-item'; // Adjusted to show 2 cards in a row
+          villaCard.innerHTML = `
+            <div class="card card1">
+              <img src="${villa.image}" class="card_img" alt="Villa Image">
+              <div class="card-body">
+                <h5 class="card-title">${villa.location} Villa</h5>
+                <h6 class="card-title" >Available dates ${new Date(Math.min(...villa.date.map(date => new Date(date)))).toLocaleDateString()} to ${new Date(Math.max(...villa.date.map(date => new Date(date)))).toLocaleDateString()} </h6>
+                <p class="card-text">${villa.description}</p>
+                <div class="submit-bid">
+                  <a href="#" class="btn btn-primary" onclick="showVillaDetails(${villa.id})">show details</a>
+                </div>
+              </div>
+            </div>
+          `;
+          villaList.appendChild(villaCard);
+        }
+      });
+
+      if (!found) {
+        villasData.forEach(villa => {
+          const villaCard = document.createElement('div');
+          villaCard.className = 'col-xl-6 col-md-12 mb-4 villa-item'; // Adjusted to show 2 cards in a row
+          villaCard.innerHTML = `
+            <div class="card card1">
+              <img src="${villa.image}" class="card_img" alt="Villa Image">
+              <div class="card-body">
+                <h5 class="card-title">${villa.location} Villa</h5>
+                <p class="card-text">${villa.description}</p>
+                <div class="submit-bid">
+                  <a href="#" class="btn btn-primary" onclick="showVillaDetails(${villa.id})">Book Now</a>
+                </div>
+              </div>
+            </div>
+          `;
+          villaList.appendChild(villaCard);
+        });
+      }
+    }
+
+    function showVillaDetails(id) {
+      const villa = villasData.find(villa => villa.id === id);
+      if (villa) {
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Villa Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div id="carouselExampleIndicators${id}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                  <div class="carousel-inner">
+                    ${villa.villamulteimg.map((img, index) => `
+                      <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                        <img src="${img}" class="d-block w-100" alt="Villa Image">
+                      </div>
+                    `).join('')}
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators${id}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators${id}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+                <div class="modal_info">
+                  <h5 class="card-title">${villa.location} Villa</h5>
+                  <h6 class="card-title" >Available dates ${new Date(Math.min(...villa.date.map(date => new Date(date)))).toLocaleDateString()} to ${new Date(Math.max(...villa.date.map(date => new Date(date)))).toLocaleDateString()} </h6>
+                  <p class="card-text">${villa.description}</p>
+                </div>
+                <div class="booking-details">
+                <form>
+                  <label for="startDate">Start Date:</label>
+                  <input type="date" id="startDate" class="form-control" onchange="calculateTotalPrice(${id})">
+                  <label for="totalDays">Total Days:</label>
+                  <input type="number" id="totalDays" class="form-control" min="1" value="1" placeholder="Total days" onchange="calculateTotalPrice(${id})">
+                  <p id="totalPrice">Total Price: ₹<span id="priceSpan">${villa.price}</span></p>
+                  </form>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="bookNow(${id})">Book Now</button>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+        const modalInstance = new bootstrap.Modal(modal);
+        modalInstance.show();
+      }
+    }
+
+    function calculateTotalPrice(id) {
+      const villa = villasData.find(villa => villa.id === id);
+      const startDateInput = document.getElementById('startDate');
+      const totalDaysInput = document.getElementById('totalDays') || 1;
+      const totalPriceSpan = document.getElementById('priceSpan');
+      const startDate = new Date(startDateInput.value);
+      const totalDays = parseInt(totalDaysInput.value);
+      const totalPrice = villa.price * totalDays;
+      totalPriceSpan.textContent = totalPrice;
+    }
+
+    function bookNow(id) {
+      const villa = villasData.find(villa => villa.id === id);
+      const startDate = document.getElementById('startDate').value;
+      if (villa) {
+        alert(`You have booked the ${villa.location} Villa starting from ${startDate} for ${document.getElementById('totalDays').value} days. The total price is ₹${document.getElementById('priceSpan').textContent}.`);
+      }
+    }
+  </script>
+</head>
+
+<body >
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <div style="font-size: 30px; font-weight: bold;color: white;">Homi Verses </div> 
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html" style="font-size: 20px;">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="our_villas.html" style="font-size: 20px;">Our Villas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about_us.html" style="font-size: 20px;">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact_us.html" style="font-size: 20px;">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sign_up.html" style="font-size: 20px;">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html" style="font-size: 20px;">Log In</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-lg-3 mb-4">
+        <div class="filters border border-dark position-sticky" style="top: 25px;">
+          <h4 class="text-center">Villa Filters</h4>
+          <hr>
+          <label for="location">Location:</label>
+          <select id="location" class="form-control">
+            <option value="">All Locations</option>
+            <option value="Beachfront">Beachfront</option>
+            <option value="Mountain">Mountain</option>
+            <option value="City">City</option>
+          </select>
+          <hr>
+          <label for="start-date">Start Date:</label>
+          <input type="date" id="start-date" class="form-control">
+          <hr>
+          <label for="end-date">End Date:</label>
+          <input type="date" id="end-date" class="form-control">
+          <hr>
+          <label for="price">Price (Max):</label>
+          <input type="number" id="price" class="form-control" min="0" placeholder="Max price">
+          <hr>
+          <button class="btn btn-primary w-100" onclick="applyFilters()">Apply Filters</button>
+          <button class="btn btn-secondary w-100 mt-2" onclick="applyFilters('clear')">Clear Filters</button>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div id="villaList" class="row">
+          <!-- Villa Cards will be dynamically generated here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h4 class="footer-heading">About Us</h4>
+                <p>We are dedicated to creating exceptional architectural designs that transform spaces and enhance lives. Our commitment to excellence drives everything we do.</p>
+                <div class="social-links mt-3 ">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="list-unstyled">
+                    <li><a href="./index.html" class="footer-link">Home</a></li>
+                    <li><a href="our_villas.html" class="footer-link">Our villas</a></li>
+                    <li><a href="about_us.html" class="footer-link">About Us</a></li>
+                    <li><a href="contact_us.html" class="footer-link">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4 class="footer-heading">Contact Info</h4>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-map-marker-alt me-2"></i> 123 Architecture Street, City, Country</li>
+                    <li><i class="fas fa-phone me-2"></i> +1 (234) 567-8900</li>
+                    <li><i class="fas fa-envelope me-2"></i> info@architecture.com</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="mt-4 mb-4 " style="border-color: rgba(255,255,255,0.1);">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="mb-0">&copy; 2024 Architecture & Design. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+<script>
+  applyFilters();
+</script>
+
+</html>
